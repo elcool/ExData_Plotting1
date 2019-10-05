@@ -27,9 +27,11 @@ consumption$DateTime <- paste(consumption$Date,consumption$Time)
 consumption$DateTime <- as.POSIXct(strptime(consumption$DateTime, format = "%d/%m/%Y %H:%M:%S"))
 
 
-### start plot 1
-hist(consumption$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
+### start plot 2
+plot(consumption$Global_active_power ~ consumption$DateTime, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
 
-dev.copy(png, file = "plot1.png")
+dev.copy(png, file = "plot2.png")
 dev.off()
+
+
 

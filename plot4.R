@@ -27,9 +27,23 @@ consumption$DateTime <- paste(consumption$Date,consumption$Time)
 consumption$DateTime <- as.POSIXct(strptime(consumption$DateTime, format = "%d/%m/%Y %H:%M:%S"))
 
 
-### start plot 1
-hist(consumption$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
 
-dev.copy(png, file = "plot1.png")
+### start plot 4
+par(mfcol = c(2,2))
+#1
+plot(consumption$Global_active_power ~ consumption$DateTime, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
+#2
+plot(consumption$Sub_metering_1 ~ consumption$DateTime, type = "l", xlab = "", ylab = "Energy sub metering")
+lines(consumption$Sub_metering_2 ~ consumption$DateTime , type = "l", col = "red")
+lines(consumption$Sub_metering_3 ~ consumption$DateTime , type = "l", col = "blue")
+legend("topright",  legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), lty = 1, col = c("black","red","blue")) 
+#3
+plot(consumption$Voltage ~ consumption$DateTime, type = "l", xlab = "datetime", ylab = "Voltage")
+#4
+plot(consumption$Global_reactive_power ~ consumption$DateTime, type = "l", xlab = "datetime", ylab = "Global_reactive_power")
+
+dev.copy(png, file = "plot4.png")
 dev.off()
+
+#par(mfrow=c(1,1))
 
